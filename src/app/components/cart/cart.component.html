@@ -1,0 +1,75 @@
+<section
+  *ngIf="productsAdded; else msg"
+  class="mx-auto w-75 bg-main-light rounded shadow p-4 my-4"
+>
+  <div class="d-flex justify-content-between align-items-center">
+    <h2>Shop Cart</h2>
+    <button (click)="clearCart()" class="clear p-1">Clear Cart</button>
+  </div>
+  <p class="text-danger">
+    Total Price: {{ productsAdded.totalCartPrice | currency : " EGP " }}
+  </p>
+  <div class="row g-4" *ngFor="let item of productsAdded.products">
+    <div class="col-md-1">
+      <img
+        [src]="item.product.imageCover"
+        class="w-100"
+        [alt]="item.product.title"
+      />
+    </div>
+    <div class="col-md-11">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h4 class="small">{{ item.product.title }}</h4>
+          <p class="text-danger mb-0">
+            Price: {{ item.price | currency : " EGP " }}
+          </p>
+          <button
+            #removeProduct
+            (click)="deleteProduct(item.product._id, removeProduct)"
+            class="btn text-main p-0 m-0 fw-light"
+          >
+            <i class="fas fa-trash-can"></i> Remove
+          </button>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <button
+            #clicked
+            (click)="updateCart(item.product._id, item.count - 1, clicked)"
+            class="update"
+          >
+            -
+          </button>
+
+          <span class="mx-1">{{ item.count }}</span>
+
+          <button
+            #decrease
+            (click)="updateCart(item.product._id, item.count + 1, decrease)"
+            class="update"
+          >
+            +
+          </button>
+        </div>
+      </div>
+    </div>
+    <hr class="my-3" />
+  </div>
+  <button
+    [routerLink]="['/Ecommerce/checkout', productsAdded._id]"
+    class="btn-main p-1"
+  >
+    Online Payment <img src="./assets/images/visa.svg" alt="" />
+  </button>
+</section>
+
+<ng-template #msg>
+  <div class="my-3">
+    <h2 class="text-danger text-center">Your Cart is Empty</h2>
+    <img
+      src="./assets/images/Empty_Shopping_Cart_blog.webp"
+      class="mx-auto d-block"
+      alt="Empty Cart"
+    />
+  </div>
+</ng-template>

@@ -1,0 +1,110 @@
+<section class="my-4 bg-main-light p-4 mx-auto w-75">
+  <h1>CheckOut Session</h1>
+
+  <form [formGroup]="shippingAddress" (ngSubmit)="handleForm()">
+    <div>
+      <label for="details">details</label>
+      <textarea
+        #detailsInp
+        formControlName="details"
+        id="details"
+        cols="2"
+        rows="2"
+        class="form-control"
+      ></textarea>
+
+      <div
+        *ngIf="
+          shippingAddress.get('details')?.errors &&
+          (shippingAddress.get('details')?.touched ||
+            detailsInp.value.length > 0)
+        "
+        class="alert alert-danger w-50 mx-auto text-center small mt-2"
+      >
+        <p
+          *ngIf="shippingAddress.get('details')?.getError('required')"
+          class="m-0"
+        >
+          details is Required
+        </p>
+        <p
+          *ngIf="shippingAddress.get('details')?.getError('minlength')"
+          class="m-0"
+        >
+          Min Length should be 3 chars
+        </p>
+        <p
+          *ngIf="shippingAddress.get('details')?.getError('maxlength')"
+          class="m-0"
+        >
+          Max Length should be 20 chars
+        </p>
+      </div>
+    </div>
+
+    <div class="my-2">
+      <label for="phone">phone</label>
+      <input
+        #phoneInp
+        formControlName="phone"
+        type="tel"
+        id="phone"
+        class="form-control"
+      />
+
+      <div
+        *ngIf="
+          shippingAddress.get('phone')?.errors &&
+          (shippingAddress.get('phone')?.touched || phoneInp.value.length > 0)
+        "
+        class="alert alert-danger w-50 mx-auto text-center small mt-2"
+      >
+        <p
+          *ngIf="shippingAddress.get('phone')?.getError('required')"
+          class="m-0"
+        >
+          phone is Required
+        </p>
+        <p
+          *ngIf="shippingAddress.get('phone')?.getError('pattern')"
+          class="m-0"
+        >
+          Accept only Egyptian phone numbers
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <label for="city">city</label>
+      <input
+        #cityInp
+        formControlName="city"
+        type="text"
+        id="city"
+        class="form-control"
+      />
+
+      <div
+        *ngIf="
+          shippingAddress.get('city')?.errors &&
+          (shippingAddress.get('city')?.touched || cityInp.value.length > 0)
+        "
+        class="alert alert-danger w-50 mx-auto text-center small mt-2"
+      >
+        <p
+          *ngIf="shippingAddress.get('city')?.getError('required')"
+          class="m-0"
+        >
+          city is Required
+        </p>
+        <p *ngIf="shippingAddress.get('city')?.getError('pattern')" class="m-0">
+          It isn't a city name
+        </p>
+      </div>
+    </div>
+
+    <button [disabled]="shippingAddress.invalid" class="btn-main mt-3">
+      CheckOut
+    </button>
+  </form>
+</section>

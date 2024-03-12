@@ -1,0 +1,62 @@
+<section class="my-5">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-md-3">
+        <div>
+          <!--? Product Image -->
+          <owl-carousel-o [options]="customOptions">
+            <ng-container *ngFor="let image of productInfo.images">
+              <ng-template carouselSlide>
+                <img [src]="image" alt="product image" />
+              </ng-template>
+            </ng-container>
+          </owl-carousel-o>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="position-relative">
+          <span
+            *ngIf="wishListData.includes(productInfo._id)"
+            (click)="removeProduct(productInfo._id)"
+            ><i class="fa-solid fa-heart detailsHeart2"></i
+          ></span>
+          <span
+            *ngIf="!wishListData.includes(productInfo._id)"
+            (click)="addTowish(productInfo._id)"
+            ><i class="fa-regular fa-heart detailsHeart1"></i
+          ></span>
+
+          <!--? Product Name  -->
+          <h3>{{ productInfo.title }}</h3>
+          <!--? Product Description  -->
+          <h4 class="h6">{{ productInfo.description }}</h4>
+          <div class="d-flex justify-content-between align-items-center">
+            <!--? Product Price  -->
+            <span>{{ productInfo.price | currency : " EGP " }}</span>
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div>
+                <i
+                  [class.rating-color]="productInfo.ratingsAverage >= i"
+                  *ngFor="let i of [1, 2, 3, 4, 5]"
+                  class="fas fa-star"
+                ></i>
+              </div>
+              <span class="text-muted ms-2">{{
+                productInfo.ratingsAverage
+              }}</span>
+            </div>
+          </div>
+
+          <button
+            #added
+            (click)="addToCart(productInfo._id, added)"
+            class="btn-main mx-auto d-block w-100"
+          >
+            +Add To Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

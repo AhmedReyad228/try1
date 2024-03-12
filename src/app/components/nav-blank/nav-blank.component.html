@@ -1,0 +1,118 @@
+<nav
+  #navBar
+  class="navbar navbar-expand-md navbar-light bg-light position-fixed w-100"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"
+      ><img src="./assets/images/freshcart-logo.svg" alt="freshcart logo"
+    /></a>
+    <button
+      class="navbar-toggler d-lg-none"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapsibleNavId"
+      aria-controls="collapsibleNavId"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+      <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active-link"
+            routerLink="Ecommerce/home"
+            >Home</a
+          >
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active-link"
+            routerLink="Ecommerce/products"
+            >Products</a
+          >
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active-link"
+            routerLink="Ecommerce/categories"
+            >Categories</a
+          >
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active-link"
+            routerLink="Ecommerce/brands"
+            >Brands</a
+          >
+        </li>
+      </ul>
+
+      <ul class="navbar-nav ms-auto mt-2 mt-lg-0 align-items-center">
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="fas fa-user fa-xl text-main"></i>
+          </a>
+          <ul class="dropdown-menu p-0">
+            <li role="button">
+              <a
+                routerLink="Ecommerce/forgetpassword"
+                routerLinkActive="active-link"
+                class="dropdown-item"
+                >Forget Password</a
+              >
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a
+            routerLink="Ecommerce/wishlist"
+            class="nav-link position-relative me-2"
+          >
+            <i class="fa-solid fa-heart fa-2xl text-danger"></i>
+            <span class="badge bg-info position-absolute top-0 end-0">{{
+              wishNum
+            }}</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link position-relative me-2"
+            routerLink="Ecommerce/cart"
+          >
+            <i class="fas fa-cart-shopping fa-2xl text-main"></i>
+            <span class="badge bg-info position-absolute top-0 end-0">{{
+              cartNum
+            }}</span>
+          </a>
+        </li>
+
+        <li class="nav-item d-flex gap-3 me-3">
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-facebook"></i>
+          <i class="fab fa-tiktok"></i>
+          <i class="fab fa-twitter"></i>
+          <i class="fab fa-youtube"></i>
+        </li>
+        <li class="nav-item">
+          <span class="cursor-pointer" (click)="goBack()">SignOut</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

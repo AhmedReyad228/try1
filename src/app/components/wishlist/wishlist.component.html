@@ -1,0 +1,61 @@
+<!-- ? products  -->
+<section *ngIf="products.length > 0; else msg" class="my-4">
+  <div class="row g-4">
+    <div class="col-md-2" *ngFor="let product of products">
+      <div class="product">
+        <span
+          *ngIf="wishListData.includes(product._id)"
+          (click)="removeProduct(product._id)"
+          ><i class="fa-solid fa-heart heart2"></i
+        ></span>
+        <div
+          [routerLink]="['/Ecommerce/details', product._id]"
+          class="cursor-pointer"
+        >
+          <div class="p-2">
+            <img
+              [src]="product.imageCover"
+              class="w-100"
+              [alt]="product.title"
+            />
+          </div>
+          <!--? Category Name -->
+          <h5 class="h6 mt-1 text-danger">{{ product.category.name }}</h5>
+          <!--? Product Name -->
+          <h4 class="h6">
+            {{ product.title | termtext : 2 }}
+          </h4>
+          <!--? Price -->
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="font-sm">{{ product.price | currency : "USD" }}</span>
+            <div>
+              <i
+                [class.rating-color]="product.ratingsAverage >= num"
+                *ngFor="let num of [1, 2, 3, 4, 5]"
+                class="fas fa-star"
+              ></i>
+              <span class="text-muted">{{ product.ratingsAverage }}</span>
+            </div>
+          </div>
+        </div>
+        <button
+          #btnAdded
+          (click)="addToCart(product._id, btnAdded)"
+          class="btn-main mx-auto d-block w-100"
+        >
+          +Add To Cart
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #msg>
+  <div class="my-3">
+    <img
+      src="./assets/images/empty_wishlist.png"
+      class="mx-auto d-block"
+      alt="Empty Cart"
+    />
+  </div>
+</ng-template>
